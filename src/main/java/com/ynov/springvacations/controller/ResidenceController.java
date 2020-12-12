@@ -27,7 +27,7 @@ public class ResidenceController {
     @ResponseStatus(HttpStatus.OK)
     public List<Apartment> getVehicles() {
         List<Apartment> apartments = new ArrayList<>();
-        Apartment apartment = new Apartment(2,150f,true,true,500f);
+        Apartment apartment = new Apartment(2, 150f, true, true, 500f);
         apartments.add(apartment);
         return apartments;
     }
@@ -36,8 +36,13 @@ public class ResidenceController {
     @ResponseStatus(HttpStatus.OK)
     public Residence generateResidence() {
         return residenceService.generateResidence(
-                Set.of(new Apartment(2,150f,true,true,500f))
+                Set.of(new Apartment(2, 150f, true, true, 500f))
         );
     }
 
+    @GetMapping("/create")
+    @ResponseStatus(HttpStatus.OK)
+    public void create(Residence residence) {
+        residenceService.add(residence);
+    }
 }

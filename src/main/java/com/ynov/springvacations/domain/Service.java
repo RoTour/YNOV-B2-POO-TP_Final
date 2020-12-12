@@ -1,7 +1,9 @@
 package com.ynov.springvacations.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "service")
@@ -20,6 +22,19 @@ public class Service {
 
     @Column(name = "updated_at")
     private Date updated_at;
+
+    @ManyToMany(mappedBy = "services")
+    private List<Residence> residences = new ArrayList<>();
+
+    public Service(String name) {
+        this.name = name;
+        this.created_at = new Date();
+        this.updated_at = new Date();
+    }
+
+    public Service() {
+
+    }
 
     public Long getService_id() {
         return service_id;
@@ -51,5 +66,13 @@ public class Service {
 
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public List<Residence> getResidences() {
+        return residences;
+    }
+
+    public void setResidences(List<Residence> residences) {
+        this.residences = residences;
     }
 }

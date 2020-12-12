@@ -26,7 +26,7 @@ public class ResidenceService {
                 "RandomAddress",
                 "GPS",
                 "Mountain",
-                "Ski station",
+                List.of(new com.ynov.springvacations.domain.Service("Ski")),
                 Set.of()
         );
         residenceRepository.save(newResidence);
@@ -35,5 +35,13 @@ public class ResidenceService {
             apartmentRepository.save(it);
         });
         return newResidence;
+    }
+
+    public List<Residence> getResidences() {
+        return residenceRepository.findAll();
+    }
+
+    public void add(Residence residence) {
+        residenceRepository.save(residence);
     }
 }

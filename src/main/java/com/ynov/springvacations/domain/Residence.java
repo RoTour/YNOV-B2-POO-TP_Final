@@ -2,6 +2,7 @@ package com.ynov.springvacations.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "residence")
@@ -26,8 +27,8 @@ public class Residence {
     @Column(name = "location_type")
     private String locationType;
 
-    @Column(name = "services_available")
-    private String services;
+
+//    private String services;
 
     @Column(name = "created_at")
     private Date created_at;
@@ -39,10 +40,13 @@ public class Residence {
     @JoinColumn(name = "residence_id")
     private Set<Apartment> apartments;
 
+    @ManyToMany
+    private List<Service> services;
+
     public Residence() {
     }
 
-    public Residence(String country, String state, String address, String gpsLocation, String locationType, String services, Set<Apartment> apartments) {
+    public Residence(String country, String state, String address, String gpsLocation, String locationType, List<Service> services, Set<Apartment> apartments) {
         this.country = country;
         this.state = state;
         this.address = address;
@@ -106,11 +110,11 @@ public class Residence {
         this.locationType = locationType;
     }
 
-    public String getServices() {
+    public List<Service> getServices() {
         return services;
     }
 
-    public void setServices(String services) {
+    public void setServices(List<Service> services) {
         this.services = services;
     }
 
