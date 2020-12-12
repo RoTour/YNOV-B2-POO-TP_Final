@@ -27,10 +27,10 @@ public class Apartment {
     private Float rent;
 
     @Column(name = "created_at")
-    private Date created_at = new Date();
+    private Date created_at;
 
     @Column(name = "updated_at")
-    private Date updated_at = new Date();
+    private Date updated_at;
 
     @ManyToOne
     @JoinColumn(name = "residence_id")

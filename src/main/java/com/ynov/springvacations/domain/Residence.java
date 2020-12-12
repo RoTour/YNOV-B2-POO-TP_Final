@@ -30,10 +30,10 @@ public class Residence {
     private String services;
 
     @Column(name = "created_at")
-    private Date created_at = new Date();
+    private Date created_at;
 
     @Column(name = "updated_at")
-    private Date updated_at = new Date();
+    private Date updated_at;
 
     @OneToMany
     @JoinColumn(name = "residence_id")
