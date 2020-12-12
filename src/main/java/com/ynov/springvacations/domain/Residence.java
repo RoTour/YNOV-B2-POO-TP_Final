@@ -1,6 +1,7 @@
 package com.ynov.springvacations.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity(name = "residence")
@@ -10,12 +11,29 @@ public class Residence {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long residence_id;
 
+    @Column(name = "country")
     private String country;
+
+    @Column(name = "state")
     private String state;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "gps_location")
     private String gpsLocation;
+
+    @Column(name = "location_type")
     private String locationType;
+
+    @Column(name = "services_available")
     private String services;
+
+    @Column(name = "created_at")
+    private Date created_at = new Date();
+
+    @Column(name = "updated_at")
+    private Date updated_at = new Date();
 
     @OneToMany
     @JoinColumn(name = "residence_id")
@@ -94,5 +112,29 @@ public class Residence {
 
     public void setServices(String services) {
         this.services = services;
+    }
+
+    public Set<Apartment> getApartments() {
+        return apartments;
+    }
+
+    public void setApartments(Set<Apartment> apartments) {
+        this.apartments = apartments;
+    }
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+
+    public Date getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Date updated_at) {
+        this.updated_at = updated_at;
     }
 }

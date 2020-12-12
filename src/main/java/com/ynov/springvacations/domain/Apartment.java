@@ -1,19 +1,36 @@
 package com.ynov.springvacations.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
+@Table(name = "apartment")
 public class Apartment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long apartment_id;
 
+    @Column(name = "number_of_beds")
     private Integer nbBeds;
+
+    @Column(name = "area")
     private Float area;
+
+    @Column(name = "has_baby_kit")
     private Boolean babyKit;
+
+    @Column(name = "has_air_conditioning")
     private Boolean airConditioning;
+
+    @Column(name = "rent_per_day")
     private Float rent;
+
+    @Column(name = "created_at")
+    private Date created_at = new Date();
+
+    @Column(name = "updated_at")
+    private Date updated_at = new Date();
 
     @ManyToOne
     @JoinColumn(name = "residence_id")
@@ -89,5 +106,21 @@ public class Apartment {
 
     public void setResidence_id(Residence residence_id) {
         this.residence_id = residence_id;
+    }
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+
+    public Date getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Date updated_at) {
+        this.updated_at = updated_at;
     }
 }
