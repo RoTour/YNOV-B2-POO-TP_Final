@@ -4,9 +4,10 @@ import javax.persistence.*;
 
 @Entity
 public class Apartment {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long apartment_id;
 
     private Integer nbBeds;
     private Float area;
@@ -14,8 +15,14 @@ public class Apartment {
     private Boolean airConditioning;
     private Float rent;
 
-    public Apartment(Long id, Integer nbBeds, Float area, Boolean babyKit, Boolean airConditioning, Float rent) {
-        this.id = id;
+    @ManyToOne
+    @JoinColumn(name = "residence_id")
+    private Residence residence_id;
+
+    public Apartment() {
+    }
+
+    public Apartment(Integer nbBeds, Float area, Boolean babyKit, Boolean airConditioning, Float rent) {
         this.nbBeds = nbBeds;
         this.area = area;
         this.babyKit = babyKit;
@@ -23,25 +30,17 @@ public class Apartment {
         this.rent = rent;
     }
 
-    public Apartment() {
-        this.nbBeds = 0;
-        this.area = 0f;
-        this.babyKit = false;
-        this.airConditioning = false;
-        this.rent = 0f;
-    }
-
     @Override
     public String toString() {
-        return "id:"+this.id+"; nbBeds:"+this.nbBeds;
+        return "id:"+this.apartment_id +"; nbBeds:"+this.nbBeds;
     }
 
-    public Long getId() {
-        return id;
+    public Long getApartment_id() {
+        return apartment_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setApartment_id(Long id) {
+        this.apartment_id = id;
     }
 
     public Integer getNbBeds() {
@@ -82,5 +81,13 @@ public class Apartment {
 
     public void setRent(Float rent) {
         this.rent = rent;
+    }
+
+    public Residence getResidence_id() {
+        return residence_id;
+    }
+
+    public void setResidence_id(Residence residence_id) {
+        this.residence_id = residence_id;
     }
 }
