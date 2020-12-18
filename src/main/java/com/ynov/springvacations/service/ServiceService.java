@@ -30,4 +30,8 @@ public class ServiceService {
         newValues.setId(id);
         serviceRepository.save(newValues);
     }
+
+    public void destroy(Long id) {
+        serviceRepository.deleteById(id);
+    }
 }
