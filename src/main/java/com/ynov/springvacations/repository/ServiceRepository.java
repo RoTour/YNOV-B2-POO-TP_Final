@@ -1,9 +1,9 @@
 package com.ynov.springvacations.repository;
 
-import com.ynov.springvacations.domain.Residence;
+import com.ynov.springvacations.domain.Service;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ResidenceRepository extends JpaRepository<Residence, Long> {
+public interface ServiceRepository extends JpaRepository<Service, Long> {
 }

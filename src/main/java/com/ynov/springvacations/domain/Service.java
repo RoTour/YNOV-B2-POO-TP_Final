@@ -1,78 +1,22 @@
 package com.ynov.springvacations.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "service")
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "service_id")
-    private Long service_id;
-
-    @Column(name = "name")
+    private Long id;
     private String name;
 
-    @Column(name = "created_at")
-    private Date created_at;
-
-    @Column(name = "updated_at")
-    private Date updated_at;
-
-    @ManyToMany(mappedBy = "services")
-    private List<Residence> residences = new ArrayList<>();
-
-    public Service(String name) {
-        this.name = name;
-        this.created_at = new Date();
-        this.updated_at = new Date();
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Service() {
-
-    }
-
-    public Long getService_id() {
-        return service_id;
-    }
-
-    public void setService_id(Long service_id) {
-        this.service_id = service_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
-    }
-
-    public Date getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
-    }
-
-    public List<Residence> getResidences() {
-        return residences;
-    }
-
-    public void setResidences(List<Residence> residences) {
-        this.residences = residences;
+    @Id
+    public Long getId() {
+        return id;
     }
 }

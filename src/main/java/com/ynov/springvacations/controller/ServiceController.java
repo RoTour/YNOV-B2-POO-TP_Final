@@ -1,33 +1,23 @@
 package com.ynov.springvacations.controller;
 
-
-import com.ynov.springvacations.domain.Residence;
 import com.ynov.springvacations.domain.Service;
-import com.ynov.springvacations.service.ResidenceService;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.ynov.springvacations.service.ServiceService;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
-@RequestMapping("/services")
+@RequestMapping("/service")
 public class ServiceController {
 
-    ResidenceService mResidenceService;
+    ServiceService mServiceService;
 
-    public ServiceController(ResidenceService residenceService) {
-        mResidenceService = residenceService;
+    public ServiceController(ServiceService serviceService) {
+        mServiceService = serviceService;
     }
 
-    @GetMapping("/create")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Residence> create(String name, ArrayList<Residence> linkedResidences){
-//        Service newService = new Service(name);
-        return mResidenceService.getResidences();
+    @RequestMapping("/create")
+    public void create(Service service){
+        mServiceService.create(service);
     }
 
 }
