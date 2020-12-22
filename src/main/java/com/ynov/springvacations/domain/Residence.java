@@ -1,6 +1,8 @@
 package com.ynov.springvacations.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "residence")
+//@JsonIgnoreProperties(value = {"services"})
 public class Residence {
 
     @Id
@@ -18,7 +21,7 @@ public class Residence {
     private String gps;
     private String type;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "residence_services",
             joinColumns = {
                     @JoinColumn(name = "residence_id")

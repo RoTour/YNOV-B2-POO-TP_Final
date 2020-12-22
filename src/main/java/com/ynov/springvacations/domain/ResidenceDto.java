@@ -2,6 +2,9 @@ package com.ynov.springvacations.domain;
 
 import com.sun.istack.Nullable;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class ResidenceDto {
 
     @Nullable
@@ -10,6 +13,7 @@ public class ResidenceDto {
     private String address;
     private String gps;
     private String type;
+    private Set<ServiceDto> services;
 
     public ResidenceDto() {
     }
@@ -21,6 +25,19 @@ public class ResidenceDto {
         this.gps = residence.getGps();
         this.type = residence.getType();
     }
+
+    public ResidenceDto(Residence residence, Boolean setServices) {
+        this.id = residence.getId();
+        this.country = residence.getCountry();
+        this.address = residence.getAddress();
+        this.gps = residence.getGps();
+        this.type = residence.getType();
+        if (setServices) {
+            this.services = residence.getServices().stream().map(ServiceDto::new)
+                    .collect(Collectors.toSet());
+        }
+    }
+
 
     public Long getId() {
         return id;
@@ -60,5 +77,13 @@ public class ResidenceDto {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Set<ServiceDto> getServices() {
+        return services;
+    }
+
+    public void setServices(Set<ServiceDto> services) {
+        this.services = services;
     }
 }

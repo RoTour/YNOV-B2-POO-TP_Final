@@ -1,11 +1,14 @@
 package com.ynov.springvacations.controller;
 
+import com.ynov.springvacations.domain.Residence;
+import com.ynov.springvacations.domain.ResidenceDto;
 import com.ynov.springvacations.domain.ServiceDto;
 import com.ynov.springvacations.service.ServiceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/service")
@@ -27,6 +30,12 @@ public class ServiceController {
     public void setService(ServiceDto serviceDto){
         System.out.println("Set SERVICE");
         mServiceService.setService(serviceDto);
+    }
+
+    @GetMapping("{id}/residences")
+    @ResponseStatus(HttpStatus.OK)
+    public Set<ResidenceDto> getResidences(@PathVariable String id) {
+        return mServiceService.getResidences(Long.parseLong(id));
     }
 
     @GetMapping("/{id}")
