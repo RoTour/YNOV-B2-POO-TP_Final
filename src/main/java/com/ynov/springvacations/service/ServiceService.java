@@ -1,37 +1,33 @@
 package com.ynov.springvacations.service;
 
+import com.ynov.springvacations.domain.ServiceDto;
 import com.ynov.springvacations.repository.ServiceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ServiceService {
-
-    ServiceRepository serviceRepository;
+    ServiceRepository mServiceRepository;
 
     public ServiceService(ServiceRepository serviceRepository) {
-        this.serviceRepository = serviceRepository;
+        this.mServiceRepository = serviceRepository;
     }
 
-    public void create(com.ynov.springvacations.domain.Service service) {
-        serviceRepository.save(service);
+    public List<ServiceDto> getServices() {
+        return mServiceRepository.findAll().stream().map((ServiceDto::new)).collect(Collectors.toList());
     }
 
-    public List<com.ynov.springvacations.domain.Service> getAll() {
-        return serviceRepository.findAll();
+    public ServiceDto getService(Long id) {
+        return new ServiceDto(mServiceRepository.findById(id).orElseThrow());
     }
 
-    public com.ynov.springvacations.domain.Service findById(Long id) {
-        return serviceRepository.findById(id).orElse(new com.ynov.springvacations.domain.Service());
+    public void setService(ServiceDto serviceDto) {
+        mServiceRepository.save(new com.ynov.springvacations.domain.Service(serviceDto));
     }
 
-    public void update(Long id, com.ynov.springvacations.domain.Service newValues) {
-        newValues.setId(id);
-        serviceRepository.save(newValues);
-    }
-
-    public void destroy(Long id) {
-        serviceRepository.deleteById(id);
+    public void delete(Long id) {
+        mServiceRepository.deleteById(id);
     }
 }

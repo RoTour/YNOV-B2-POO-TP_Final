@@ -1,6 +1,6 @@
 package com.ynov.springvacations.controller;
 
-import com.ynov.springvacations.domain.Service;
+import com.ynov.springvacations.domain.ServiceDto;
 import com.ynov.springvacations.service.ServiceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,35 +18,28 @@ public class ServiceController {
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public List<Service> getServices(){
-        return mServiceService.getAll();
+    public List<ServiceDto> getServices(){
+        return mServiceService.getServices();
     }
 
-    @GetMapping("/create")
+    @GetMapping("/create_or_update")
     @ResponseStatus(HttpStatus.OK)
-    public void create(Service service){
-        mServiceService.create(service);
+    public void setService(ServiceDto serviceDto){
+        System.out.println("Set SERVICE");
+        mServiceService.setService(serviceDto);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Service show(@PathVariable String id) {
-        Long idLong = Long.parseLong(id);
-        return mServiceService.findById(idLong);
+    public ServiceDto getService(@PathVariable String id) {
+        return mServiceService.getService(Long.parseLong(id));
     }
 
-    // If id does not exist, creates new service with provided id
-    @GetMapping("/{id}/edit")
-    @ResponseStatus(HttpStatus.OK)
-    public void edit(@PathVariable String id, Service service) {
-        Long idLong = Long.parseLong(id);
-        mServiceService.update(idLong, service);
-    }
 
     @GetMapping("/{id}/destroy")
     @ResponseStatus(HttpStatus.OK)
     public void destroy(@PathVariable String id) {
-        mServiceService.destroy(Long.parseLong(id));
+        mServiceService.delete(Long.parseLong(id));
     }
 
 }

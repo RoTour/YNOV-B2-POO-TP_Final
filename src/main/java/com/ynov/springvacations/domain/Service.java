@@ -14,13 +14,21 @@ public class Service {
     @Column(name = "name")
     private String name;
 
+    public Service(ServiceDto serviceDto) {
+        this.id = serviceDto.getId();
+        this.name = serviceDto.getName();
+    }
+
+    public Service() {
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-//    public Long getId() {
-//        return id;
-//    }
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

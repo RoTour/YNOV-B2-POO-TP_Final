@@ -1,12 +1,20 @@
 package com.ynov.springvacations.domain;
 
+import com.sun.istack.Nullable;
+
 public class ServiceDto {
-    private Long id;
+
+    @Nullable
+    private Long id = null;
+
     private String name;
 
-    public ServiceDto(Long id, String name) {
-        this.id = id;
-        this.name = name;
+    public ServiceDto() {
+    }
+
+    public ServiceDto(Service service) {
+        this.id = service.getId();
+        this.name = service.getName();
     }
 
     public Long getId() {
