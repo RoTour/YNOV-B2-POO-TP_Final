@@ -1,8 +1,11 @@
 package com.ynov.springvacations.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "services")
 //@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 public class Service {
 
@@ -13,6 +16,10 @@ public class Service {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "services")
+    private Set<Residence> residences = new HashSet<>();
+
 
     public Service(ServiceDto serviceDto) {
         this.id = serviceDto.getId();
@@ -36,5 +43,13 @@ public class Service {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Residence> getResidences() {
+        return residences;
+    }
+
+    public void setResidences(Set<Residence> residences) {
+        this.residences = residences;
     }
 }

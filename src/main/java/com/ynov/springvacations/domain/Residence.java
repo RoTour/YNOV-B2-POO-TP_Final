@@ -1,14 +1,13 @@
 package com.ynov.springvacations.domain;
 
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "residence")
 public class Residence {
 
     @Id
@@ -18,6 +17,16 @@ public class Residence {
     private String address;
     private String gps;
     private String type;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "residence_services",
+            joinColumns = {
+                    @JoinColumn(name = "residence_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "service_id")
+            })
+    private Set<Service> services = new HashSet<>();
 
 //    private List<Service> services;
 
@@ -71,5 +80,13 @@ public class Residence {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Set<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(Set<Service> services) {
+        this.services = services;
     }
 }
