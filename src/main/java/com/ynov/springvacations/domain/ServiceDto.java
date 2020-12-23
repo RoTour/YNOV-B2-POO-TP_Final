@@ -51,4 +51,12 @@ public class ServiceDto {
     public void setResidences(Set<ResidenceDto> residences) {
         this.residences = residences;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof ServiceDto)) return false;
+        return (this.id.equals(((ServiceDto) obj).getId()) &&
+                this.name.equals(((ServiceDto) obj).getName())
+        );
+    }
 }

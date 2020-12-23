@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "residence")
@@ -40,6 +41,7 @@ public class Residence {
         this.address = residenceDto.getAddress();
         this.gps = residenceDto.getGps();
         this.type = residenceDto.getType();
+        this.services = residenceDto.getServices().stream().map(Service::new).collect(Collectors.toSet());
     }
 
     public Residence() {

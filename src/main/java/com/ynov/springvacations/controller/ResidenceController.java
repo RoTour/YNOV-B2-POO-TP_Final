@@ -1,9 +1,7 @@
 package com.ynov.springvacations.controller;
 
 
-import com.ynov.springvacations.domain.Residence;
 import com.ynov.springvacations.domain.ResidenceDto;
-import com.ynov.springvacations.domain.Service;
 import com.ynov.springvacations.domain.ServiceDto;
 import com.ynov.springvacations.service.ResidenceService;
 import org.springframework.http.HttpStatus;
@@ -38,6 +36,19 @@ public class ResidenceController {
     public Set<ServiceDto> getResidenceServices(@PathVariable String id){
         return mResidenceService.getResidenceServices(Long.parseLong(id));
     }
+
+    @GetMapping("/{id}/addService")
+    @ResponseStatus(HttpStatus.OK)
+    public void addService(@PathVariable String id, Long serviceId) {
+        mResidenceService.addService(Long.parseLong(id), serviceId);
+    }
+
+    @GetMapping("/{id}/removeService")
+    @ResponseStatus(HttpStatus.OK)
+    public void removeService(@PathVariable String id, Long serviceId) {
+        mResidenceService.removeService(Long.parseLong(id), serviceId);
+    }
+
     @GetMapping("/create_or_update")
     @ResponseStatus(HttpStatus.OK)
     public void setResidence(ResidenceDto residenceDto){

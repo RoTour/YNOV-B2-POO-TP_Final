@@ -1,5 +1,6 @@
 package com.ynov.springvacations;
 
+import com.fasterxml.classmate.AnnotationConfiguration;
 import com.ynov.springvacations.domain.Residence;
 import com.ynov.springvacations.domain.Service;
 import org.hibernate.HibernateException;
@@ -10,42 +11,17 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 
-public class HibernateUtils {
-
-    private static SessionFactory sessionFactory = null;
-
-    static {
-        try{
-            loadSessionFactory();
-        }catch(Exception e){
-            System.err.println("Exception while initializing hibernate util.. ");
-            e.printStackTrace();
-        }
-    }
-
-    public static void loadSessionFactory(){
-
-        Configuration configuration = new Configuration();
-//        configuration.configure("/j2n-hibernate.cfg.xml");
-        configuration.addAnnotatedClass(Residence.class);
-        configuration.addAnnotatedClass(Service.class);
-        ServiceRegistry srvcReg = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-        sessionFactory = configuration.buildSessionFactory(srvcReg);
-    }
-
-    public static Session getSession() throws HibernateException {
-
-        Session retSession=null;
-        try {
-            retSession = sessionFactory.openSession();
-        }catch(Throwable t){
-            System.err.println("Exception while getting session.. ");
-            t.printStackTrace();
-        }
-        if(retSession == null) {
-            System.err.println("session is discovered null");
-        }
-
-        return retSession;
-    }
-}
+//public class HibernateUtils {
+//    public static SessionFactory factory;
+//    //to disallow creating objects by other classes.
+//    private HibernateUtils() {
+//    }
+//    //maling the Hibernate SessionFactory object as singleton
+//    public static synchronized SessionFactory getSessionFactory() {
+//        if (factory == null) {
+//            factory = new Configuration().configure("hibernate.cfg.xml").
+//                    buildSessionFactory();
+//        }
+//        return factory;
+//    }
+//}
