@@ -23,9 +23,11 @@ public class ServiceDto {
     public ServiceDto(Service service, Boolean setResidences) {
         this.id = service.getId();
         this.name = service.getName();
-        if(setResidences) this.residences = service.getResidences().stream()
-                .map(ResidenceDto::new)
-                .collect(Collectors.toSet());
+        if(setResidences) {
+            this.residences = service.getResidences().stream()
+                    .map(ResidenceDto::new)
+                    .collect(Collectors.toSet());
+        }
     }
 
     public Long getId() {
@@ -52,11 +54,4 @@ public class ServiceDto {
         this.residences = residences;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if(!(obj instanceof ServiceDto)) return false;
-        return (this.id.equals(((ServiceDto) obj).getId()) &&
-                this.name.equals(((ServiceDto) obj).getName())
-        );
-    }
 }

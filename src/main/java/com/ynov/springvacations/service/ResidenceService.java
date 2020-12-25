@@ -56,21 +56,23 @@ public class ResidenceService implements IResidenceService {
         try {
             ResidenceDto residenceDto = new ResidenceDto(mResidenceRepository.findById(residenceId).orElseThrow(), true);
             residenceDto.getServices().add(new ServiceDto(mServiceRepository.findById(serviceId).orElseThrow()));
-            Residence residence = new Residence(residenceDto);
+            Residence residence = new Residence(residenceDto, true);
             mResidenceRepository.save(residence);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public void removeService(Long residenceId, Long serviceId) {
         try {
             ResidenceDto residenceDto = new ResidenceDto(mResidenceRepository.findById(residenceId).orElseThrow(), true);
             residenceDto.setServices(residenceDto.getServices().stream()
                     .filter(it -> !it.getId().equals(serviceId)).collect(Collectors.toSet()));
-            Residence residence = new Residence(residenceDto);
+            Residence residence = new Residence(residenceDto,true);
             mResidenceRepository.save(residence);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

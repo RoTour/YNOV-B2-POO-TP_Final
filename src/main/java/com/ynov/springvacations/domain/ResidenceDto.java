@@ -33,7 +33,8 @@ public class ResidenceDto {
         this.gps = residence.getGps();
         this.type = residence.getType();
         if (setServices) {
-            this.services = residence.getServices().stream().map(ServiceDto::new)
+            this.services = residence.getServices().stream()
+                    .map(ServiceDto::new)
                     .collect(Collectors.toSet());
         }
     }

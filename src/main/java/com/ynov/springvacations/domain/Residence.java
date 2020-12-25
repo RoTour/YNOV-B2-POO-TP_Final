@@ -4,6 +4,7 @@ package com.ynov.springvacations.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "residence")
 //@JsonIgnoreProperties(value = {"services"})
-public class Residence {
+public class Residence implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,7 +23,7 @@ public class Residence {
     private String gps;
     private String type;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(name = "residence_services",
             joinColumns = {
                     @JoinColumn(name = "residence_id")
@@ -41,7 +42,18 @@ public class Residence {
         this.address = residenceDto.getAddress();
         this.gps = residenceDto.getGps();
         this.type = residenceDto.getType();
-        this.services = residenceDto.getServices().stream().map(Service::new).collect(Collectors.toSet());
+    }
+    public Residence(ResidenceDto residenceDto, Boolean setServices) {
+        this.id = residenceDto.getId();
+        this.country = residenceDto.getCountry();
+        this.address = residenceDto.getAddress();
+        this.gps = residenceDto.getGps();
+        this.type = residenceDto.getType();
+        if(setServices){
+            this.services = residenceDto.getServices().stream()
+                    .map(Service::new)
+                    .collect(Collectors.toSet());
+        }
     }
 
     public Residence() {

@@ -28,7 +28,6 @@ public class ServiceController {
     @GetMapping("/create_or_update")
     @ResponseStatus(HttpStatus.OK)
     public void setService(ServiceDto serviceDto){
-        System.out.println("Set SERVICE");
         mServiceService.setService(serviceDto);
     }
 
@@ -36,6 +35,18 @@ public class ServiceController {
     @ResponseStatus(HttpStatus.OK)
     public Set<ResidenceDto> getResidences(@PathVariable String id) {
         return mServiceService.getResidences(Long.parseLong(id));
+    }
+
+    @GetMapping("/{id}/addResidence")
+    @ResponseStatus(HttpStatus.OK)
+    public void addResidence(@PathVariable String id, Long residenceId) {
+        mServiceService.addResidence(Long.parseLong(id), residenceId);
+    }
+
+    @GetMapping("/{id}/removeResidence")
+    @ResponseStatus(HttpStatus.OK)
+    public void removeResidence(@PathVariable String id, Long residenceId) {
+        mServiceService.removeResidence(Long.parseLong(id), residenceId);
     }
 
     @GetMapping("/{id}")

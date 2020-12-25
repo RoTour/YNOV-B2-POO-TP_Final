@@ -3,14 +3,16 @@ package com.ynov.springvacations.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "services")
 //@JsonIgnoreProperties(value = {"residences"})
 //@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
-public class Service {
+public class Service implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -20,7 +22,7 @@ public class Service {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "services")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "services")
     private Set<Residence> residences = new HashSet<>();
 
 
@@ -30,6 +32,16 @@ public class Service {
     }
 
     public Service() {
+    }
+
+    public Service(ServiceDto serviceDto, Boolean setResidences) {
+        this.id = serviceDto.getId();
+        this.name = serviceDto.getName();
+        if(setResidences){
+            this.residences = serviceDto.getResidences().stream()
+                    .map(Residence::new)
+                    .collect(Collectors.toSet());
+        }
     }
 
     public void setId(Long id) {

@@ -1,20 +1,27 @@
 package com.ynov.springvacations.service;
 
-import com.ynov.springvacations.domain.ResidenceDto;
-import com.ynov.springvacations.domain.ServiceDto;
+import com.ynov.springvacations.domain.*;
+import com.ynov.springvacations.repository.ResidenceRepository;
+import com.ynov.springvacations.repository.ResidenceServicePivotRepository;
 import com.ynov.springvacations.repository.ServiceRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
+@org.springframework.stereotype.Service
 public class ServiceService {
     ServiceRepository mServiceRepository;
+    ResidenceRepository mResidenceRepository;
+    ResidenceServicePivotRepository mPivotRepository;
 
-    public ServiceService(ServiceRepository serviceRepository) {
+    public ServiceService(
+            ServiceRepository serviceRepository,
+            ResidenceRepository residenceRepository,
+            ResidenceServicePivotRepository pivotRepository) {
         this.mServiceRepository = serviceRepository;
+        this.mResidenceRepository = residenceRepository;
+        this.mPivotRepository = pivotRepository;
     }
 
     public List<ServiceDto> getServices() {
@@ -42,4 +49,17 @@ public class ServiceService {
                 .map(ResidenceDto::new)
                 .collect(Collectors.toSet());
     }
+
+    public void addResidence(Long serviceId, Long residenceId) {
+        ResidenceServicePivot newPivot = new ResidenceServicePivot(residenceId, serviceId);
+        mPivotRepository.save(newPivot);
+    }
+
+    public void removeResidence(Long serviceId, Long residenceId) {
+    }
+
+//    public void addResidence(Long serviceId, Long residenceId) {
+//        ServiceDto serviceDto = new ServiceDto(mServiceRepository.findById(serviceId).orElseThrow(), true);
+//        serviceDto.getResidences().add(new)
+//    }
 }
