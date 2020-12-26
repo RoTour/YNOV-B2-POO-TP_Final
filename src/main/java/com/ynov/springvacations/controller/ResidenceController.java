@@ -15,7 +15,6 @@ import java.util.Set;
 public class ResidenceController {
 
     final ResidenceService mResidenceService;
-
     public ResidenceController(ResidenceService residenceService) {
         mResidenceService = residenceService;
     }
@@ -26,11 +25,24 @@ public class ResidenceController {
         return mResidenceService.getResidences();
     }
 
+    @GetMapping("/create_or_update")
+    @ResponseStatus(HttpStatus.OK)
+    public void setResidence(ResidenceDto residenceDto){
+        mResidenceService.setResidence(residenceDto);
+    }
+
+    @GetMapping("/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(Long id) {
+        mResidenceService.delete(id);
+    }
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResidenceDto getResidence(@PathVariable String id){
         return mResidenceService.getResidence(Long.parseLong(id));
     }
+
     @GetMapping("/{id}/services")
     @ResponseStatus(HttpStatus.OK)
     public Set<ServiceDto> getResidenceServices(@PathVariable String id){
@@ -47,18 +59,6 @@ public class ResidenceController {
     @ResponseStatus(HttpStatus.OK)
     public void removeService(@PathVariable String id, Long serviceId) {
         mResidenceService.removeService(Long.parseLong(id), serviceId);
-    }
-
-    @GetMapping("/create_or_update")
-    @ResponseStatus(HttpStatus.OK)
-    public void setResidence(ResidenceDto residenceDto){
-        mResidenceService.setResidence(residenceDto);
-    }
-
-    @GetMapping("/delete")
-    @ResponseStatus(HttpStatus.OK)
-    public void delete(Long id) {
-        mResidenceService.delete(id);
     }
 
 }

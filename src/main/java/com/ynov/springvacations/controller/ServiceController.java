@@ -31,6 +31,18 @@ public class ServiceController {
         mServiceService.setService(serviceDto);
     }
 
+    @GetMapping("/{id}/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@PathVariable String id) {
+        mServiceService.delete(Long.parseLong(id));
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ServiceDto getService(@PathVariable String id) {
+        return mServiceService.getService(Long.parseLong(id));
+    }
+
     @GetMapping("{id}/residences")
     @ResponseStatus(HttpStatus.OK)
     public Set<ResidenceDto> getResidences(@PathVariable String id) {
@@ -49,17 +61,5 @@ public class ServiceController {
         mServiceService.removeResidence(Long.parseLong(id), residenceId);
     }
 
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ServiceDto getService(@PathVariable String id) {
-        return mServiceService.getService(Long.parseLong(id));
-    }
-
-
-    @GetMapping("/{id}/delete")
-    @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable String id) {
-        mServiceService.delete(Long.parseLong(id));
-    }
 
 }
