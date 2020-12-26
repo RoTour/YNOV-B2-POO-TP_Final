@@ -56,6 +56,7 @@ public class ServiceService {
     }
 
     public void removeResidence(Long serviceId, Long residenceId) {
+        mPivotRepository.delete(new ResidenceServicePivot(residenceId, serviceId));
     }
 
 //    public void addResidence(Long serviceId, Long residenceId) {

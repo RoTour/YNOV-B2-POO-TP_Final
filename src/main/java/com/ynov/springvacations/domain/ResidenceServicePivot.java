@@ -8,9 +8,12 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "residence_services")
+@IdClass(ResidenceServicePivotId.class)
 public class ResidenceServicePivot implements Serializable {
+
     @Id
     private Long residence_id;
+    @Id
     private Long service_id;
 
     public ResidenceServicePivot() {

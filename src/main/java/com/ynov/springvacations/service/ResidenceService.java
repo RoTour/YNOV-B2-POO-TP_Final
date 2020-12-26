@@ -2,9 +2,12 @@ package com.ynov.springvacations.service;
 
 import com.ynov.springvacations.domain.Residence;
 import com.ynov.springvacations.domain.ResidenceDto;
+import com.ynov.springvacations.domain.ResidenceServicePivot;
 import com.ynov.springvacations.domain.ServiceDto;
 import com.ynov.springvacations.repository.ResidenceRepository;
+import com.ynov.springvacations.repository.ResidenceServicePivotRepository;
 import com.ynov.springvacations.repository.ServiceRepository;
+import org.apache.catalina.Store;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +18,12 @@ import java.util.stream.Collectors;
 public class ResidenceService implements IResidenceService {
     ResidenceRepository mResidenceRepository;
     ServiceRepository mServiceRepository;
+    ResidenceServicePivotRepository mPivotRepository;
 
-    public ResidenceService(ResidenceRepository residenceRepository, ServiceRepository serviceRepository) {
-        mResidenceRepository = residenceRepository;
-        mServiceRepository = serviceRepository;
+    public ResidenceService(ResidenceRepository mResidenceRepository, ServiceRepository mServiceRepository, ResidenceServicePivotRepository mPivotRepository) {
+        this.mResidenceRepository = mResidenceRepository;
+        this.mServiceRepository = mServiceRepository;
+        this.mPivotRepository = mPivotRepository;
     }
 
     @Override
@@ -53,26 +58,12 @@ public class ResidenceService implements IResidenceService {
     }
 
     public void addService(Long residenceId, Long serviceId) {
-        try {
-            ResidenceDto residenceDto = new ResidenceDto(mResidenceRepository.findById(residenceId).orElseThrow(), true);
-            residenceDto.getServices().add(new ServiceDto(mServiceRepository.findById(serviceId).orElseThrow()));
-            Residence residence = new Residence(residenceDto, true);
-            mResidenceRepository.save(residence);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ResidenceServicePivot newPivot = new ResidenceServicePivot(residenceId, serviceId);
+        mPivotRepository.save(newPivot);
     }
 
     public void removeService(Long residenceId, Long serviceId) {
-        try {
-            ResidenceDto residenceDto = new ResidenceDto(mResidenceRepository.findById(residenceId).orElseThrow(), true);
-            residenceDto.setServices(residenceDto.getServices().stream()
-                    .filter(it -> !it.getId().equals(serviceId)).collect(Collectors.toSet()));
-            Residence residence = new Residence(residenceDto,true);
-            mResidenceRepository.save(residence);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        mPivotRepository.delete(new ResidenceServicePivot(residenceId, serviceId));
     }
 
 }
