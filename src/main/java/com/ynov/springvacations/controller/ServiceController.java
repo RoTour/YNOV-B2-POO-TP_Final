@@ -56,9 +56,9 @@ public class ServiceController {
     }
 
 
-    @GetMapping("/{id}/destroy")
+    @GetMapping("/{id}/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void destroy(@PathVariable String id) {
+    public void delete(@PathVariable String id) {
         mServiceService.delete(Long.parseLong(id));
     }
 

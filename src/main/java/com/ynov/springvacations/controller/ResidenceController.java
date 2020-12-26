@@ -57,7 +57,7 @@ public class ResidenceController {
 
     @GetMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void create(Long id) {
+    public void delete(Long id) {
         mResidenceService.delete(id);
     }
 
