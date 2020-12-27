@@ -1,6 +1,7 @@
 package com.ynov.springvacations.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "apartment")
@@ -16,6 +17,9 @@ public class Apartment {
     @ManyToOne
     @JoinColumn(name = "residence_id", nullable = false)
     private Residence residence;
+
+    @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER)
+    private Set<Reservation> reservations;
 
     public Apartment() {
     }
@@ -84,5 +88,13 @@ public class Apartment {
 
     public void setResidence(Residence residence) {
         this.residence = residence;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

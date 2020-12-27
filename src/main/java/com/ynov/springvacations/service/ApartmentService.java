@@ -2,6 +2,7 @@ package com.ynov.springvacations.service;
 
 import com.ynov.springvacations.domain.Apartment;
 import com.ynov.springvacations.domain.ApartmentDto;
+import com.ynov.springvacations.domain.ReservationDto;
 import com.ynov.springvacations.repository.ApartmentRepository;
 import com.ynov.springvacations.repository.ResidenceRepository;
 import org.springframework.stereotype.Service;
@@ -40,4 +41,5 @@ public class ApartmentService {
     public ApartmentDto getApartment(Long id) {
         return new ApartmentDto(apartmentRepository.findById(id).orElseThrow());
     }
+
 }
