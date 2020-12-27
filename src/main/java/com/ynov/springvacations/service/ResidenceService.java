@@ -1,13 +1,9 @@
 package com.ynov.springvacations.service;
 
-import com.ynov.springvacations.domain.Residence;
-import com.ynov.springvacations.domain.ResidenceDto;
-import com.ynov.springvacations.domain.ResidenceServicePivot;
-import com.ynov.springvacations.domain.ServiceDto;
+import com.ynov.springvacations.domain.*;
 import com.ynov.springvacations.repository.ResidenceRepository;
 import com.ynov.springvacations.repository.ResidenceServicePivotRepository;
 import com.ynov.springvacations.repository.ServiceRepository;
-import org.apache.catalina.Store;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,4 +62,9 @@ public class ResidenceService implements IResidenceService {
         mPivotRepository.delete(new ResidenceServicePivot(residenceId, serviceId));
     }
 
+    public List<ApartmentDto> getApartments(Long residenceId) {
+        return mResidenceRepository.findById(residenceId).orElseThrow()
+                .getApartments().stream()
+                .map(it -> new ApartmentDto(it, residenceId)).collect(Collectors.toList());
+    }
 }

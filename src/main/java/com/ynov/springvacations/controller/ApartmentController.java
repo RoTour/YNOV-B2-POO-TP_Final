@@ -22,13 +22,13 @@ public class ApartmentController {
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public List<ApartmentDto> getResidences(){
+    public List<ApartmentDto> getApartments(){
         return mApartmentService.getApartments();
     }
 
     @GetMapping("/create_or_update")
     @ResponseStatus(HttpStatus.OK)
-    public void setResidence(ApartmentDto apartmentDto){
+    public void setApartment(ApartmentDto apartmentDto){
         mApartmentService.setApartment(apartmentDto);
     }
 
@@ -40,7 +40,7 @@ public class ApartmentController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ApartmentDto getResidence(@PathVariable String id){
+    public ApartmentDto getApartment(@PathVariable String id){
         return mApartmentService.getApartment(Long.parseLong(id));
     }
 

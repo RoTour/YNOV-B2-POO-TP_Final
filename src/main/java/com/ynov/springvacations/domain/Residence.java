@@ -22,6 +22,8 @@ public class Residence implements Serializable {
     private String address;
     private String gps;
     private String type;
+    @OneToMany(mappedBy = "residence", fetch = FetchType.EAGER)
+    private Set<Apartment> apartments;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(name = "residence_services",
@@ -105,5 +107,13 @@ public class Residence implements Serializable {
 
     public void setServices(Set<Service> services) {
         this.services = services;
+    }
+
+    public Set<Apartment> getApartments() {
+        return apartments;
+    }
+
+    public void setApartments(Set<Apartment> apartments) {
+        this.apartments = apartments;
     }
 }

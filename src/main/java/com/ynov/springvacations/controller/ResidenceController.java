@@ -1,6 +1,7 @@
 package com.ynov.springvacations.controller;
 
 
+import com.ynov.springvacations.domain.ApartmentDto;
 import com.ynov.springvacations.domain.ResidenceDto;
 import com.ynov.springvacations.domain.ServiceDto;
 import com.ynov.springvacations.service.ResidenceService;
@@ -59,6 +60,11 @@ public class ResidenceController {
     @ResponseStatus(HttpStatus.OK)
     public void removeService(@PathVariable String id, Long serviceId) {
         mResidenceService.removeService(Long.parseLong(id), serviceId);
+    }
+    @GetMapping("/{id}/apartments")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ApartmentDto> getApartments(@PathVariable String id) {
+        return mResidenceService.getApartments(Long.parseLong(id));
     }
 
 }

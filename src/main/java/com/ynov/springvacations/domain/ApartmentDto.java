@@ -7,6 +7,7 @@ public class ApartmentDto {
     private Boolean babyKit;
     private Boolean airConditioning;
     private Float rentPerDay;
+    private Long residence_id;
 
     public ApartmentDto() {
     }
@@ -18,6 +19,16 @@ public class ApartmentDto {
         this.babyKit = apartment.getBabyKit();
         this.airConditioning = apartment.getAirConditioning();
         this.rentPerDay = apartment.getRentPerDay();
+        this.residence_id = apartment.getId();
+    }
+    public ApartmentDto(Apartment apartment, Long residence_id) {
+        this.id = apartment.getId();
+        this.nbBeds = apartment.getNbBeds();
+        this.area = apartment.getArea();
+        this.babyKit = apartment.getBabyKit();
+        this.airConditioning = apartment.getAirConditioning();
+        this.rentPerDay = apartment.getRentPerDay();
+        this.residence_id = residence_id;
     }
 
     public Long getId() {
@@ -66,5 +77,13 @@ public class ApartmentDto {
 
     public void setRentPerDay(Float rentPerDay) {
         this.rentPerDay = rentPerDay;
+    }
+
+    public Long getResidence_id() {
+        return residence_id;
+    }
+
+    public void setResidence_id(Long residence_id) {
+        this.residence_id = residence_id;
     }
 }

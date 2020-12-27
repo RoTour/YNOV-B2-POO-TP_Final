@@ -13,17 +13,21 @@ public class Apartment {
     private Boolean babyKit;
     private Boolean airConditioning;
     private Float rentPerDay;
+    @ManyToOne
+    @JoinColumn(name = "residence_id", nullable = false)
+    private Residence residence;
 
     public Apartment() {
     }
 
-    public Apartment(ApartmentDto apartmentDto) {
+    public Apartment(ApartmentDto apartmentDto, Residence residence) {
         this.id = apartmentDto.getId();
         this.nbBeds = apartmentDto.getNbBeds();
         this.area = apartmentDto.getArea();
         this.babyKit = apartmentDto.getBabyKit();
         this.airConditioning = apartmentDto.getAirConditioning();
         this.rentPerDay = apartmentDto.getRentPerDay();
+        this.residence = residence;
     }
 
     public Long getId() {
@@ -72,5 +76,13 @@ public class Apartment {
 
     public void setRentPerDay(Float rentPerDay) {
         this.rentPerDay = rentPerDay;
+    }
+
+    public Residence getResidence() {
+        return residence;
+    }
+
+    public void setResidence(Residence residence) {
+        this.residence = residence;
     }
 }
