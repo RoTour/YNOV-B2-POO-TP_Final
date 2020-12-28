@@ -14,6 +14,7 @@ public class ResidenceDto {
     private String gps;
     private String type;
     private Set<ServiceDto> services;
+    private Set<ApartmentDto> apartments;
 
     public ResidenceDto() {
     }
@@ -38,6 +39,25 @@ public class ResidenceDto {
                     .collect(Collectors.toSet());
         }
     }
+    public ResidenceDto(Residence residence, Boolean setServices, Boolean setApartments) {
+        this.id = residence.getId();
+        this.country = residence.getCountry();
+        this.address = residence.getAddress();
+        this.gps = residence.getGps();
+        this.type = residence.getType();
+        if (setServices) {
+            this.services = residence.getServices().stream()
+                    .map(ServiceDto::new)
+                    .collect(Collectors.toSet());
+        }
+        if (setApartments) {
+            this.apartments = residence.getApartments().stream()
+                    .map(ApartmentDto::new)
+                    .collect(Collectors.toSet());
+        }
+    }
+
+
 
 
     public Long getId() {
@@ -86,5 +106,13 @@ public class ResidenceDto {
 
     public void setServices(Set<ServiceDto> services) {
         this.services = services;
+    }
+
+    public Set<ApartmentDto> getApartments() {
+        return apartments;
+    }
+
+    public void setApartments(Set<ApartmentDto> apartments) {
+        this.apartments = apartments;
     }
 }

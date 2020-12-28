@@ -12,8 +12,10 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Date startsAt;
+    @Temporal(TemporalType.DATE)
     private Date endsAt;
+    @Temporal(TemporalType.DATE)
+    private Date startsAt;
 
     @ManyToOne
     @JoinColumn(name = "apartment_id", nullable = false)
