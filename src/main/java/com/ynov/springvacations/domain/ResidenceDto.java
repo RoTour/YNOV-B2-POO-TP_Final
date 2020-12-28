@@ -10,6 +10,7 @@ public class ResidenceDto {
     @Nullable
     private Long id = null;
     private String country;
+    private String region;
     private String address;
     private String gps;
     private String type;
@@ -22,6 +23,7 @@ public class ResidenceDto {
     public ResidenceDto(Residence residence) {
         this.id = residence.getId();
         this.country = residence.getCountry();
+        this.region = residence.getRegion();
         this.address = residence.getAddress();
         this.gps = residence.getGps();
         this.type = residence.getType();
@@ -30,6 +32,7 @@ public class ResidenceDto {
     public ResidenceDto(Residence residence, Boolean setServices) {
         this.id = residence.getId();
         this.country = residence.getCountry();
+        this.region = residence.getRegion();
         this.address = residence.getAddress();
         this.gps = residence.getGps();
         this.type = residence.getType();
@@ -42,6 +45,7 @@ public class ResidenceDto {
     public ResidenceDto(Residence residence, Boolean setServices, Boolean setApartments) {
         this.id = residence.getId();
         this.country = residence.getCountry();
+        this.region = residence.getRegion();
         this.address = residence.getAddress();
         this.gps = residence.getGps();
         this.type = residence.getType();
@@ -114,5 +118,13 @@ public class ResidenceDto {
 
     public void setApartments(Set<ApartmentDto> apartments) {
         this.apartments = apartments;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 }

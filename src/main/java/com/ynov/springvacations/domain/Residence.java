@@ -1,24 +1,21 @@
 package com.ynov.springvacations.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "residence")
-//@JsonIgnoreProperties(value = {"services"})
 public class Residence implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String country;
+    private String region;
     private String address;
     private String gps;
     private String type;
@@ -41,6 +38,7 @@ public class Residence implements Serializable {
     public Residence(ResidenceDto residenceDto) {
         this.id = residenceDto.getId();
         this.country = residenceDto.getCountry();
+        this.region = residenceDto.getRegion();
         this.address = residenceDto.getAddress();
         this.gps = residenceDto.getGps();
         this.type = residenceDto.getType();
@@ -115,5 +113,13 @@ public class Residence implements Serializable {
 
     public void setApartments(Set<Apartment> apartments) {
         this.apartments = apartments;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 }
