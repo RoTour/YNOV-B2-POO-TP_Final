@@ -18,7 +18,7 @@ public class Apartment {
     @JoinColumn(name = "residence_id", nullable = false)
     private Residence residence;
 
-    @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<Reservation> reservations;
 
     public Apartment() {

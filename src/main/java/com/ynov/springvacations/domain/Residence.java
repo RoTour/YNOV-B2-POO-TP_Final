@@ -19,10 +19,10 @@ public class Residence implements Serializable {
     private String address;
     private String gps;
     private String type;
-    @OneToMany(mappedBy = "residence", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "residence", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<Apartment> apartments;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "residence_services",
             joinColumns = {
                     @JoinColumn(name = "residence_id")
