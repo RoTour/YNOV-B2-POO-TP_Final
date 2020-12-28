@@ -15,4 +15,6 @@ import java.util.Set;
 public interface ResidenceRepository extends JpaRepository<Residence, Long> {
 
     Optional<List<Residence>> findByCountry(String country);
+    Optional<List<Residence>> findByRegion(String region);
+
 }
