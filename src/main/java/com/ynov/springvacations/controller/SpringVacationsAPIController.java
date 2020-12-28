@@ -28,10 +28,16 @@ public class SpringVacationsAPIController {
         return apiService.getResidenceByCountry(country);
     }
 
-    @GetMapping("/apartsByRegion")
+    @GetMapping("/apartmentsByRegion")
     @ResponseStatus(HttpStatus.OK)
     public List<ApartmentDto> getApartmentsByRegion(String region) {
         return apiService.getApartmentsByRegion(region);
+    }
+
+    @GetMapping("apartmentsByService")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ApartmentDto> getApartmentsByService(String serviceName) {
+        return apiService.getApartmentsByService(serviceName);
     }
 
 

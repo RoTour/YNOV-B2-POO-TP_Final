@@ -47,4 +47,19 @@ public class SpringVacationsAPIService {
 
         return result;
     }
+
+    public List<ApartmentDto> getApartmentsByService(String serviceName) {
+        List<ApartmentDto> result = new ArrayList<>();
+        List<Residence> residences = mResidenceRepository.findByService(serviceName).orElseThrow();
+        residences.forEach(residence ->
+                result.addAll(
+                        residence.getApartments().stream()
+                                .map(it -> new ApartmentDto(it, residence.getId()))
+                                .collect(Collectors.toList())
+                )
+        );
+
+        return result;
+    }
+
 }
