@@ -9,6 +9,7 @@ public class ResidenceDto {
 
     @Nullable
     private Long id = null;
+    private String name;
     private String country;
     private String region;
     private String address;
@@ -22,6 +23,7 @@ public class ResidenceDto {
 
     public ResidenceDto(Residence residence) {
         this.id = residence.getId();
+        this.name = residence.getName();
         this.country = residence.getCountry();
         this.region = residence.getRegion();
         this.address = residence.getAddress();
@@ -31,6 +33,7 @@ public class ResidenceDto {
 
     public ResidenceDto(Residence residence, Boolean setServices) {
         this.id = residence.getId();
+        this.name = residence.getName();
         this.country = residence.getCountry();
         this.region = residence.getRegion();
         this.address = residence.getAddress();
@@ -44,6 +47,7 @@ public class ResidenceDto {
     }
     public ResidenceDto(Residence residence, Boolean setServices, Boolean setApartments) {
         this.id = residence.getId();
+        this.name = residence.getName();
         this.country = residence.getCountry();
         this.region = residence.getRegion();
         this.address = residence.getAddress();
@@ -126,5 +130,13 @@ public class ResidenceDto {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

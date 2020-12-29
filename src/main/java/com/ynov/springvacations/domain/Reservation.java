@@ -37,6 +37,12 @@ public class Reservation {
         }
     }
 
+    public Reservation(Date endsAt, Date startsAt, Apartment apartment) {
+        this.endsAt = endsAt;
+        this.startsAt = startsAt;
+        this.apartment = apartment;
+    }
+
     public Long getId() {
         return id;
     }

@@ -14,6 +14,7 @@ public class Residence implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
     private String country;
     private String region;
     private String address;
@@ -37,6 +38,7 @@ public class Residence implements Serializable {
 
     public Residence(ResidenceDto residenceDto) {
         this.id = residenceDto.getId();
+        this.name = residenceDto.getName();
         this.country = residenceDto.getCountry();
         this.region = residenceDto.getRegion();
         this.address = residenceDto.getAddress();
@@ -45,6 +47,7 @@ public class Residence implements Serializable {
     }
     public Residence(ResidenceDto residenceDto, Boolean setServices) {
         this.id = residenceDto.getId();
+        this.name = residenceDto.getName();
         this.country = residenceDto.getCountry();
         this.address = residenceDto.getAddress();
         this.gps = residenceDto.getGps();
@@ -54,6 +57,15 @@ public class Residence implements Serializable {
                     .map(Service::new)
                     .collect(Collectors.toSet());
         }
+    }
+
+    public Residence(String name, String country, String region, String address, String gps, String type) {
+        this.name = name;
+        this.country = country;
+        this.region = region;
+        this.address = address;
+        this.gps = gps;
+        this.type = type;
     }
 
     public Residence() {
@@ -121,5 +133,13 @@ public class Residence implements Serializable {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -44,6 +44,10 @@ public class Service implements Serializable {
         }
     }
 
+    public Service(String name) {
+        this.name = name;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

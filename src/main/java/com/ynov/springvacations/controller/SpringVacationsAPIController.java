@@ -23,6 +23,14 @@ public class SpringVacationsAPIController {
         this.apiService = apiService;
     }
 
+
+
+    @GetMapping("/fillDatabase")
+    @ResponseStatus(HttpStatus.OK)
+    public void fillDatabase() {
+        apiService.fillDatabase();
+    }
+
     @GetMapping("/residencesByCountry")
     @ResponseStatus(HttpStatus.OK)
     public List<ResidenceDto> getResidenceByCountry(String country) {
@@ -69,6 +77,17 @@ public class SpringVacationsAPIController {
     @ResponseStatus(HttpStatus.OK)
     public List<ApartmentDto> getApartmentsAvailableWithDuration(String startDate, String endDate, Integer duration) {
         return apiService.getApartmentsAvailableWithDuration(startDate, endDate, duration);
+    }
+
+    @GetMapping("apartmentsAvailableAtSea")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ApartmentDto> getApartmentsAvailableAtSea(String startDate, String endDate) {
+        return apiService.getApartmentsAvailableAtSea(startDate, endDate);
+    }
+    @GetMapping("specificQuery")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ApartmentDto> specificQuery(String startDate, String endDate, String region) {
+        return apiService.specificQuery(startDate, endDate, region);
     }
 
 

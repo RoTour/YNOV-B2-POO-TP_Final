@@ -38,4 +38,32 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Long> {
             "WHERE (:end >= (ends_at + interval :duration day)) " +
             "OR ((:start + interval :duration day) <= starts_at );", nativeQuery = true)
     Optional<List<Apartment>> getAvailableBetweenDatesWithDuration(String start, String end, Integer duration);
+
+    @Query(value = "SELECT * " +
+            "FROM apartment " +
+            "JOIN reservation r on apartment.id = r.apartment_id " +
+            "join residence r2 on r2.id = apartment.residence_id " +
+            "WHERE ((:startDate < starts_at and :endDate < starts_at) " +
+            "OR (:startDate > ends_at and :endDate > ends_at)) " +
+            "AND lower(r2.type) = 'mer' " +
+            "ORDER BY apartment.rent_per_day;", nativeQuery = true)
+    Optional<List<Apartment>> getAvailableAtSea(String startDate, String endDate);
+
+    @Query(value = "SELECT * " +
+            "FROM apartment " +
+            "JOIN reservation r on apartment.id = r.apartment_id " +
+            "JOIN residence r2 on r2.id = apartment.residence_id " +
+            "JOIN residence_services rs on r2.id = rs.residence_id " +
+            "JOIN services s on s.id = rs.service_id " +
+            "WHERE ((:startDate < starts_at and :endDate < starts_at) " +
+            "OR (:startDate > ends_at and :endDate > ends_at)) " +
+            "AND lower(r2.type) = 'mer' " +
+            "AND lower(r2.region) = :region " +
+            "AND nb_beds >= 4 " +
+            "AND lower(s.name) = 'piscine' " +
+            "ORDER BY apartment.rent_per_day;", nativeQuery = true)
+    Optional<List<Apartment>> specificQuery(String startDate, String endDate, String region);
+
+
+
 }

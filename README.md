@@ -7,6 +7,7 @@ Note from the developer:
 
 
 
+# Instructions
 
 Projet personnel
 Ce projet personnel sera évalué.
@@ -48,9 +49,9 @@ Compléter l'API Rest afin de retourner les requêtes suivantes :
   
 - tous les appartements qui sont libres entre 2 dates données (1 point) OK
 
-- tous les appartements qui sont libres sur une durée entre 2 dates fournies (Par exemple : je cherche un appartement libre pendant 10j entre le 1er juillet et le 15 aout) (1 point)
+- tous les appartements qui sont libres sur une durée entre 2 dates fournies (Par exemple : je cherche un appartement libre pendant 10j entre le 1er juillet et le 15 aout) (1 point) OK
 
-- une liste de Dto (qui contiendra l'id de l'appartement et le prix) pour tous les appartements qui sont libres entre 2 dates données qui se trouvent à la mer, triés par ordre de prix croissant de prix (1 point)
+- une liste de Dto (qui contiendra l'id de l'appartement et le prix) pour tous les appartements qui sont libres entre 2 dates données qui se trouvent à la mer, triés par ordre de prix croissant de prix (1 point) OK
 
 - une liste de Dto (qui contiendra l'id de l'appartement, le nom du Village Vacance et le prix) pour tous les appartements qui sont libres entre 2 dates données qui se trouvent à la mer, dans une région données, avec la piscine, avec au moins 4 couchages, triés par ordre de prix croissant de prix (1 point)
 

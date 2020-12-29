@@ -34,6 +34,15 @@ public class Apartment {
         this.residence = residence;
     }
 
+    public Apartment(Integer nbBeds, Float area, Boolean babyKit, Boolean airConditioning, Float rentPerDay, Residence residence) {
+        this.nbBeds = nbBeds;
+        this.area = area;
+        this.babyKit = babyKit;
+        this.airConditioning = airConditioning;
+        this.rentPerDay = rentPerDay;
+        this.residence = residence;
+    }
+
     public Long getId() {
         return id;
     }
