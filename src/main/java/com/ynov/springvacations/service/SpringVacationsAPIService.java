@@ -9,7 +9,11 @@ import com.ynov.springvacations.repository.ResidenceRepository;
 import com.ynov.springvacations.repository.ServiceRepository;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,14 +33,14 @@ public class SpringVacationsAPIService {
 
     // Doesn't return apartment to not send too much data
     public List<ResidenceDto> getResidenceByCountry(String country) {
-        return mResidenceRepository.findByCountry(country).orElseThrow().stream()
+        return mResidenceRepository.findByCountry(country).orElse(Collections.emptyList()).stream()
                 .map(it -> new ResidenceDto(it, true, false))
                 .collect(Collectors.toList());
     }
 
     public List<ApartmentDto> getApartmentsByRegion(String region) {
         List<ApartmentDto> result = new ArrayList<>();
-        List<Residence> residences = mResidenceRepository.findByRegion(region).orElseThrow();
+        List<Residence> residences = mResidenceRepository.findByRegion(region).orElse(Collections.emptyList());
         residences.forEach(residence ->
                 result.addAll(
                         residence.getApartments().stream()
@@ -49,17 +53,40 @@ public class SpringVacationsAPIService {
     }
 
     public List<ApartmentDto> getApartmentsByService(String serviceName) {
-        List<ApartmentDto> result = new ArrayList<>();
-        List<Residence> residences = mResidenceRepository.findByService(serviceName).orElseThrow();
-        residences.forEach(residence ->
-                result.addAll(
-                        residence.getApartments().stream()
-                                .map(it -> new ApartmentDto(it, residence.getId()))
-                                .collect(Collectors.toList())
-                )
-        );
-
-        return result;
+        return mApartmentRepository.findByService(serviceName).orElse(Collections.emptyList()).stream()
+                .map(it -> new ApartmentDto(it, it.getResidence().getId()))
+                .collect(Collectors.toList());
     }
 
+    public List<ApartmentDto> getApartmentsWithPool() {
+        return getApartmentsByService("piscine");
+    }
+
+    public List<ApartmentDto> getApartmentsByType(String type) {
+        return mApartmentRepository.findByType(type).orElse(Collections.emptyList()).stream()
+                .map(it -> new ApartmentDto(it, it.getResidence().getId()))
+                .collect(Collectors.toList());
+    }
+
+    public List<ApartmentDto> getApartmentsAtMountain() {
+        return getApartmentsByType("montagne");
+    }
+
+    public List<ApartmentDto> getApartmentsAvailable(String start, String end) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date startDate = dateFormat.parse(start);
+            Date endDate = dateFormat.parse(end);
+            return mApartmentRepository.getAvailableBetween(
+                    start,
+                    end
+            ).orElse(Collections.emptyList())
+                    .stream()
+                    .map(it -> new ApartmentDto(it, it.getResidence().getId()))
+                    .collect(Collectors.toList());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
 }

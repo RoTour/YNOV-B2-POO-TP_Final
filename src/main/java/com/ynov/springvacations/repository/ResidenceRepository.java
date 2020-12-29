@@ -1,5 +1,6 @@
 package com.ynov.springvacations.repository;
 
+import com.ynov.springvacations.domain.Apartment;
 import com.ynov.springvacations.domain.Residence;
 import com.ynov.springvacations.domain.Service;
 import org.hibernate.Session;
@@ -19,10 +20,4 @@ public interface ResidenceRepository extends JpaRepository<Residence, Long> {
 
     Optional<List<Residence>> findByRegion(String region);
 
-    @Query(value = "SELECT * " +
-            "from residence " +
-            "JOIN residence_services rs on residence.id = rs.residence_id " +
-            "join services s on s.id = rs.service_id " +
-            "where lower(s.name) like lower(concat('%',:serviceName ,'%'))", nativeQuery = true)
-    Optional<List<Residence>> findByService(String serviceName);
 }

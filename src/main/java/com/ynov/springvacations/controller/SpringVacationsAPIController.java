@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -39,6 +40,32 @@ public class SpringVacationsAPIController {
     public List<ApartmentDto> getApartmentsByService(String serviceName) {
         return apiService.getApartmentsByService(serviceName);
     }
+
+    @GetMapping("apartmentsWithPool")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ApartmentDto> getApartmentsWithPool() {
+        return apiService.getApartmentsWithPool();
+    }
+
+    @GetMapping("apartmentsByType")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ApartmentDto> getApartmentsByType(String type) {
+        return apiService.getApartmentsByType(type);
+    }
+
+    @GetMapping("apartmentsAtMountain")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ApartmentDto> getApartmentsAtMountain() {
+        return apiService.getApartmentsAtMountain();
+    }
+
+    @GetMapping("apartmentsAvailable")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ApartmentDto> getApartmentsAvailable(String startDate, String endDate) {
+        return apiService.getApartmentsAvailable(startDate, endDate);
+    }
+
+
 
 
 }

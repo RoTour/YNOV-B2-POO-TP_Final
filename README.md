@@ -1,6 +1,13 @@
 # YNOV-B2-POO-TP_Final
 From : Robin TOURNE (B2 info)
 
+# IMPORTANT 
+Note from the developer:
+    - Database fields should be filled in French (especially Residence.Type and Service.name; else the getApartmentsWhitPool and the getApartmentsWithMountain ==> hard coded value to complete the questions)
+
+
+
+
 Projet personnel
 Ce projet personnel sera évalué.
 
@@ -31,19 +38,20 @@ Activer Swagger afin de tester l'API Rest.
 
 Compléter l'API Rest afin de retourner les requêtes suivantes :
 
-- touts les Village Vacances/résidence pour un pays donnée (1 points)
+- tous les Villages Vacances/résidence pour un pays donné (1 point) OK
 
-- touts les appartements pour une région donnée (1 points)
+- tous les appartements pour une région donnée (1 point) OK
 
-- tous les appartements dont la résidence possède une piscine (1 points)
+- tous les appartements dont la résidence possède une piscine (1 point) OK
 
-- tous les appartements qui sont à la montagne (1 points)
-- tous les appartements qui sont libres entre 2 dates données (1 points)
+- tous les appartements qui sont à la montagne (1 point) OK
+  
+- tous les appartements qui sont libres entre 2 dates données (1 point) OK
 
-- tous les appartements qui sont libres sur une durée entre 2 dates fournies (Par exemple : je cherche un appartement libre pendant 10j entre le 1er juillet et le 15 aout) (1 points)
+- tous les appartements qui sont libres sur une durée entre 2 dates fournies (Par exemple : je cherche un appartement libre pendant 10j entre le 1er juillet et le 15 aout) (1 point)
 
-- une liste de Dto (qui contiendra l'id de l'appartement et le prix) pour tous les appartements qui sont libres entre 2 dates données qui se trouvent à la mer, triés par ordre de prix croissant de prix (1 points)
+- une liste de Dto (qui contiendra l'id de l'appartement et le prix) pour tous les appartements qui sont libres entre 2 dates données qui se trouvent à la mer, triés par ordre de prix croissant de prix (1 point)
 
-- une liste de Dto (qui contiendra l'id de l'appartement, le nom du Village Vacance et le prix) pour tous les appartements qui sont libres entre 2 dates données qui se trouvent à la mer, dans une région données, avec la piscine, avec au moins 4 couchage, triés par ordre de prix croissant de prix (1 points)
+- une liste de Dto (qui contiendra l'id de l'appartement, le nom du Village Vacance et le prix) pour tous les appartements qui sont libres entre 2 dates données qui se trouvent à la mer, dans une région données, avec la piscine, avec au moins 4 couchages, triés par ordre de prix croissant de prix (1 point)
 
 La qualité du code et l'organisation du projet seront évalués (2 points)
