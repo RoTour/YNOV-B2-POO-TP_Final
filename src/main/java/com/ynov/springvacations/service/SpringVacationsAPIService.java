@@ -77,10 +77,8 @@ public class SpringVacationsAPIService {
         try {
             Date startDate = dateFormat.parse(start);
             Date endDate = dateFormat.parse(end);
-            return mApartmentRepository.getAvailableBetween(
-                    start,
-                    end
-            ).orElse(Collections.emptyList())
+            return mApartmentRepository.getAvailableBetween(start, end)
+                    .orElse(Collections.emptyList())
                     .stream()
                     .map(it -> new ApartmentDto(it, it.getResidence().getId()))
                     .collect(Collectors.toList());
@@ -88,5 +86,13 @@ public class SpringVacationsAPIService {
             e.printStackTrace();
         }
         return Collections.emptyList();
+    }
+
+    public List<ApartmentDto> getApartmentsAvailableWithDuration(String startDate, String endDate, Integer duration) {
+        return mApartmentRepository
+                .getAvailableBetweenDatesWithDuration(startDate, endDate, duration)
+                .orElse(Collections.emptyList()).stream()
+                .map(it -> new ApartmentDto(it, it.getResidence().getId()))
+                .collect(Collectors.toList());
     }
 }

@@ -65,6 +65,12 @@ public class SpringVacationsAPIController {
         return apiService.getApartmentsAvailable(startDate, endDate);
     }
 
+    @GetMapping("apartmentsAvailableWithDuration")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ApartmentDto> getApartmentsAvailableWithDuration(String startDate, String endDate, Integer duration) {
+        return apiService.getApartmentsAvailableWithDuration(startDate, endDate, duration);
+    }
+
 
 
 

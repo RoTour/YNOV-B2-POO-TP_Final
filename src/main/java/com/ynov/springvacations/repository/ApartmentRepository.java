@@ -25,11 +25,17 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Long> {
             "where lower(r.type) like lower(concat('%', 'montagne', '%'));", nativeQuery = true)
     Optional<List<Apartment>> findByType(String type);
 
-
     @Query(value = "SELECT * " +
             "FROM apartment " +
             "JOIN reservation r on apartment.id = r.apartment_id " +
             "WHERE (:start < starts_at and :end < starts_at) " +
-            "OR (:start > ends_at and :end > ends_at)", nativeQuery = true)
+            "OR (:start > ends_at and :end > ends_at);", nativeQuery = true)
     Optional<List<Apartment>> getAvailableBetween(String start, String end);
+
+    @Query(value = "SELECT * " +
+            "FROM apartment " +
+            "JOIN reservation r on apartment.id = r.apartment_id " +
+            "WHERE (:end >= (ends_at + interval :duration day)) " +
+            "OR ((:start + interval :duration day) <= starts_at );", nativeQuery = true)
+    Optional<List<Apartment>> getAvailableBetweenDatesWithDuration(String start, String end, Integer duration);
 }
