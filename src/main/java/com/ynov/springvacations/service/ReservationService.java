@@ -8,6 +8,9 @@ import com.ynov.springvacations.repository.ReservationRepository;
 import com.ynov.springvacations.repository.ResidenceRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ReservationService {
 
@@ -26,5 +29,15 @@ public class ReservationService {
                         apartmentRepository.findById(reservationDto.getApartment_id()).orElseThrow()
                 )
         );
+    }
+
+    public void delete(Long id) {
+        reservationRepository.deleteById(id);
+    }
+
+    public List<ReservationDto> getReservations() {
+        return reservationRepository.findAll().stream()
+                .map(ReservationDto::new)
+                .collect(Collectors.toList());
     }
 }
