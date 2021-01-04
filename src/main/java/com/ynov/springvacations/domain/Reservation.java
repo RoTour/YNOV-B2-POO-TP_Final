@@ -13,9 +13,9 @@ public class Reservation {
     private Long id;
 
     @Temporal(TemporalType.DATE)
-    private Date endsAt;
-    @Temporal(TemporalType.DATE)
     private Date startsAt;
+    @Temporal(TemporalType.DATE)
+    private Date endsAt;
 
     @ManyToOne
     @JoinColumn(name = "apartment_id", nullable = false)
@@ -37,9 +37,9 @@ public class Reservation {
         }
     }
 
-    public Reservation(Date endsAt, Date startsAt, Apartment apartment) {
-        this.endsAt = endsAt;
+    public Reservation(Date startsAt, Date endsAt, Apartment apartment) {
         this.startsAt = startsAt;
+        this.endsAt = endsAt;
         this.apartment = apartment;
     }
 
